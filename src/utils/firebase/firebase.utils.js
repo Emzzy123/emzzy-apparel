@@ -8,6 +8,7 @@ import {
   signInWithRedirect,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -72,6 +73,17 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
       email,
       password
     );
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  try {
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
     return user;
   } catch (error) {
     console.log(error);
